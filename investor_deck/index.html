@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Якоря эмоциональных состояний</title>
+<style>
+  @font-face { font-family: "Inter Deck"; src: url("fonts/Inter-Regular.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "Inter Deck"; src: url("fonts/Inter-Medium.woff2") format("woff2"); font-weight: 500; }
+  @font-face { font-family: "Inter Deck"; src: url("fonts/Inter-SemiBold.woff2") format("woff2"); font-weight: 600; }
+  @font-face { font-family: "Inter Deck"; src: url("fonts/Inter-Bold.woff2") format("woff2"); font-weight: 700; }
+
+  :root {
+    --bg: #05070b;
+    --panel: #0b1018;
+    --panel-2: #0f1622;
+    --line: rgba(233, 243, 248, 0.10);
+    --line-2: rgba(233, 243, 248, 0.18);
+    --text: #e9f3f8;
+    --muted: #93a6b4;
+    --dim: #63768a;
+    --warm: #ffb44a;
+    --cold: #4aa3ff;
+    --teal: #62d9e8;
+  }
+
+  @page { size: 1600px 900px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: "Inter Deck", "Segoe UI", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    font-feature-settings: "cv11", "ss01";
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .slide {
+    position: relative;
+    width: 1600px; height: 900px;
+    padding: 46px 72px 0;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    background:
+      radial-gradient(900px 520px at 92% -10%, rgba(74, 163, 255, 0.10), transparent 70%),
+      radial-gradient(700px 480px at -5% 110%, rgba(98, 217, 232, 0.07), transparent 70%),
+      var(--bg);
+    break-after: page;
+  }
+  .slide:last-child { break-after: auto; }
+
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500;
+  }
+  .topbar .section { color: var(--warm); }
+  .footer {
+    position: absolute; left: 72px; right: 72px; bottom: 26px;
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: var(--dim); letter-spacing: 0.04em;
+  }
+
+  h1 { font-size: 64px; line-height: 1.04; font-weight: 700; letter-spacing: -0.02em; max-width: 1180px; }
+  h2 { font-size: 40px; line-height: 1.14; font-weight: 600; letter-spacing: -0.015em; max-width: 1380px; }
+  h2 .second { color: var(--warm); }
+
+  .card {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  .tag {
+    display: inline-block; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  ul.list { list-style: none; }
+  ul.list li { position: relative; padding-left: 22px; }
+  ul.list li::before {
+    content: ""; position: absolute; left: 2px; top: 0.62em;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+  }
+
+  /* ---------- слайд 1 ---------- */
+  .s1 h1 { margin-top: 52px; }
+  .s1 .sub { margin-top: 20px; font-size: 27px; line-height: 1.3; color: var(--muted); max-width: 1100px; }
+  .s1 .ready {
+    margin-top: 30px; align-self: flex-start;
+    display: flex; align-items: center; gap: 16px;
+    padding: 15px 26px 15px 20px;
+    border-radius: 12px;
+    background: rgba(255, 180, 74, 0.09);
+    border: 1px solid rgba(255, 180, 74, 0.35);
+    font-size: 21px; line-height: 1.35;
+  }
+  .s1 .ready .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--warm); box-shadow: 0 0 14px rgba(255,180,74,.8); flex: none; }
+  .s1 .ready b { color: var(--warm); font-weight: 600; }
+  .s1 .cols {
+    margin-top: 34px;
+    display: grid; grid-template-columns: 1.32fr 0.95fr 1fr; gap: 22px;
+  }
+  .s1 .card { padding: 24px 26px 24px; }
+  .s1 .card .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .s1 .card .head .tag { color: var(--teal); }
+  .s1 .card .head .name { font-size: 23px; font-weight: 600; }
+  .s1 .card ul.list li { font-size: 16.5px; line-height: 1.42; color: #cfdde6; }
+  .s1 .card ul.list li + li { margin-top: 9px; }
+  .s1 .card.take { border-color: rgba(255, 180, 74, 0.30); }
+  .s1 .card.take .head .name { color: var(--warm); }
+  .s1 .card.take ul.list li::before { background: var(--warm); }
+  .s1 .card.take ul.list li b { color: var(--text); font-weight: 600; }
+
+  /* ---------- слайд 2 ---------- */
+  .s2 h2 { margin-top: 28px; }
+  .s2 .grid {
+    margin-top: 28px;
+    display: grid; grid-template-columns: 540px 1fr; column-gap: 40px; row-gap: 22px;
+  }
+  .s2 figure { position: relative; }
+  .s2 .painting {
+    position: relative; width: 540px; height: 360px; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--line-2); background: #10161f;
+  }
+  .s2 .painting img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s2 .painting .ph {
+    position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
+    color: var(--dim); font-size: 15px; text-align: center; padding: 30px;
+  }
+  .s2 .painting.noimg .ph { display: flex; }
+  .s2 .painting .label {
+    position: absolute; left: 14px; top: 14px;
+    padding: 7px 12px; border-radius: 8px;
+    background: rgba(5, 7, 11, 0.78); border: 1px solid rgba(98, 217, 232, 0.45);
+    color: var(--teal); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .s2 figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.35; color: var(--dim); }
+
+  .s2 .readings .tag { color: var(--teal); margin-bottom: 10px; }
+  .s2 table { width: 100%; border-collapse: collapse; }
+  .s2 td { padding: 11px 0; border-top: 1px solid var(--line); vertical-align: baseline; }
+  .s2 tr:last-child td { border-bottom: 1px solid var(--line); }
+  .s2 td.k { width: 30%; font-size: 15px; color: var(--muted); padding-right: 16px; }
+  .s2 td.v { width: 33%; font-size: 18px; font-weight: 600; padding-right: 18px; line-height: 1.3; }
+  .s2 td.v small { display: block; font-size: 13.5px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .s2 td.m { font-size: 16.5px; color: var(--teal); line-height: 1.35; }
+
+  .s2 .steps { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1.42fr; gap: 20px; }
+  .s2 .step { padding: 20px 22px; }
+  .s2 .step .t { font-size: 20px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+  .s2 .step .t .n {
+    width: 28px; height: 28px; border-radius: 50%; flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: var(--bg); background: var(--teal);
+  }
+  .s2 .step .t .arrow { color: var(--dim); font-weight: 400; }
+  .s2 .step p { font-size: 15.5px; line-height: 1.42; color: #cfdde6; }
+  .s2 .step.proof { border-color: rgba(255, 180, 74, 0.38); background: linear-gradient(180deg, rgba(255,180,74,0.08), rgba(255,180,74,0.03)); }
+  .s2 .step.proof .t { color: var(--warm); }
+  .s2 .step.proof p b { color: var(--text); font-weight: 600; }
+
+  /* ---------- слайд 3 ---------- */
+  .s3 h2 { margin-top: 28px; }
+  .s3 .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 76px; padding-bottom: 70px; }
+  .s3 .path { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .s3 .path::before {
+    content: ""; position: absolute; left: 14px; right: 14px; top: 13px; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--cold) 50%, var(--warm));
+    opacity: 0.55;
+  }
+  .s3 .stage { position: relative; padding-top: 46px; }
+  .s3 .stage .node {
+    position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--bg); border: 2px solid currentColor;
+  }
+  .s3 .stage .node::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: currentColor; }
+  .s3 .stage .when { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .s3 .stage p { font-size: 20px; line-height: 1.45; color: #cfdde6; max-width: 450px; }
+  .s3 .stage p b { color: var(--text); font-weight: 600; }
+  .s3 .stage.now { color: var(--teal); }
+  .s3 .stage.next { color: var(--cold); }
+  .s3 .stage.goal { color: var(--warm); }
+
+  .s3 .who { }
+  .s3 .who .tag { color: var(--muted); margin-bottom: 14px; }
+  .s3 .chain { display: grid; grid-template-columns: 1fr 44px 1fr 44px 1.15fr; align-items: stretch; }
+  .s3 .chain .card { padding: 18px 22px; }
+  .s3 .chain .card .r { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
+  .s3 .chain .card p { font-size: 15.5px; line-height: 1.42; color: #cfdde6; }
+  .s3 .chain .card.tool { border-color: rgba(74, 163, 255, 0.40); }
+  .s3 .chain .card.tool .r { color: var(--cold); }
+  .s3 .chain .ar { display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 26px; }
+  .s3 .close { margin-top: 22px; font-size: 19px; color: var(--warm); }
+
+  /* ---------- слайд 4 ---------- */
+  .s4 h2 { margin-top: 28px; }
+  .s4 .body { margin-top: 30px; display: grid; grid-template-columns: 1040px 1fr; gap: 44px; }
+  .s4 .preview {
+    position: relative; display: block; width: 1040px; height: 585px;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(98, 217, 232, 0.35);
+    box-shadow: 0 0 0 6px rgba(98, 217, 232, 0.05), 0 30px 80px rgba(0, 0, 0, 0.55);
+    background: #070a10;
+  }
+  .s4 .preview img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .s4 .preview .fallback {
+    position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center;
+    padding: 70px 80px;
+    background:
+      radial-gradient(520px 360px at 78% 40%, rgba(74, 163, 255, 0.20), transparent 70%),
+      radial-gradient(420px 300px at 70% 70%, rgba(98, 217, 232, 0.14), transparent 70%),
+      linear-gradient(180deg, #0b1018, #05070b);
+  }
+  .s4 .preview.noimg .fallback { display: flex; }
+  .s4 .fallback .prog { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+  .s4 .fallback .name { margin-top: 18px; font-size: 54px; font-weight: 700; letter-spacing: -0.02em; }
+  .s4 .fallback .what { margin-top: 14px; font-size: 22px; color: var(--muted); max-width: 560px; line-height: 1.4; }
+  .s4 .fallback .open {
+    margin-top: 36px; align-self: flex-start; padding: 14px 24px; border-radius: 10px;
+    background: var(--teal); color: var(--bg); font-size: 19px; font-weight: 600;
+  }
+  .s4 .fallback .by { position: absolute; left: 80px; bottom: 44px; font-size: 14px; color: var(--dim); }
+
+  .s4 .side .lead { font-size: 21px; line-height: 1.4; font-weight: 500; }
+  .s4 .side .hint { margin-top: 10px; font-size: 16px; color: var(--muted); line-height: 1.4; }
+  .s4 .side .tag { color: var(--teal); margin-top: 30px; margin-bottom: 10px; }
+  .s4 .side ul.list li { font-size: 16.5px; line-height: 1.4; color: #cfdde6; }
+  .s4 .side ul.list li + li { margin-top: 7px; }
+  .s4 .side .qr {
+    margin-top: 32px; display: flex; align-items: center; gap: 18px;
+  }
+  .s4 .side .qr .tile { width: 132px; height: 132px; padding: 11px; border-radius: 12px; background: var(--text); flex: none; }
+  .s4 .side .qr .tile img { width: 100%; height: 100%; display: block; }
+  .s4 .side .qr span { font-size: 14.5px; color: var(--muted); line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ======================= 1. Что это и что готово ======================= -->
+<section class="slide s1">
+  <div class="topbar">
+    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
+    <span class="section">Центр искусств Москва</span>
+  </div>
+
+  <h1>Поиск якорей эмоциональных состояний с&nbsp;опорой на&nbsp;искусство</h1>
+  <p class="sub">Как мозг и тело выбирают произведение, которое вас восстанавливает</p>
+
+  <div class="ready">
+    <span class="dot"></span>
+    <span><b>Двухдневный опыт с ручной обработкой данных готов.</b> Его можно предлагать гостям уже сейчас.</span>
+  </div>
+
+  <div class="cols">
+    <div class="card">
+      <div class="head"><span class="tag">День 1</span><span class="name">Смотреть</span></div>
+      <ul class="list">
+        <li>Чай и рассказ о том, как устроено исследование. Тем временем медик ставит оборудование: ЭЭГ, полиграф, очки-айтрекер.</li>
+        <li>Гость молча спускается в&nbsp;зал и&nbsp;выбирает три полотна: одно нравится, другое нет, третье хочется не замечать. Какое из них какое, он не говорит.</li>
+        <li>У каждого полотна он стоит сколько хочет. Голова неподвижна, двигаются только глаза.</li>
+        <li>Наверху ведущая читает данные приборов вслепую. В&nbsp;это время психолог ведёт с&nbsp;гостем глубокую сессию.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="head"><span class="tag">День 2</span><span class="name">Свести</span></div>
+      <ul class="list">
+        <li>Ведущая и психолог сводят два независимых разбора и находят полотно-фаворит, которое действует на гостя лучше всего.</li>
+        <li>Гостю показывают анализ, дарят отчёт и вручают репродукцию фаворита.</li>
+      </ul>
+    </div>
+    <div class="card take">
+      <div class="head"><span class="name">Гость уносит</span></div>
+      <ul class="list">
+        <li><b>Карту</b> своего взаимодействия с&nbsp;произведениями.</li>
+        <li><b>Разобранные якоря:</b> что задело, чем и&nbsp;какие жизненные пласты затронуло.</li>
+        <li><b>Репродукцию фаворита.</b> Это рабочий инструмент: с&nbsp;её помощью можно возвращаться в&nbsp;нужное состояние.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>1 / 4</span></div>
+</section>
+
+<!-- ======================= 2. Суть и доказательство ======================= -->
+<section class="slide s2">
+  <div class="topbar">
+    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
+    <span class="section">Как это работает</span>
+  </div>
+
+  <h2>Тело честно показывает, что задело. <span class="second">Что именно задело — человек рассказывает сам.</span></h2>
+
+  <div class="grid">
+    <figure>
+      <div class="painting" id="painting">
+        <img src="img/bruegel_winter.jpg" alt="Питер Брейгель Старший. Зимний пейзаж с конькобежцами и ловушкой для птиц"
+             onerror="document.getElementById('painting').classList.add('noimg'); this.remove();">
+        <div class="ph">Брейгель, «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц»</div>
+        <span class="label">Пример интерпретации</span>
+      </div>
+      <figcaption>Питер Брейгель Старший. «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц», 1565</figcaption>
+    </figure>
+
+    <div class="readings">
+      <div class="tag">Что показало тело у&nbsp;полотна с&nbsp;самым сильным откликом</div>
+      <table>
+        <tr><td class="k">Пульс в&nbsp;первые 10&nbsp;секунд</td><td class="v">−2,6 уд/мин<small>самое сильное замедление за&nbsp;сессию</small></td><td class="m">изображение «взяло»</td></tr>
+        <tr><td class="k">Зрачок</td><td class="v">4,84 → 5,02 мм<small>максимум сессии</small></td><td class="m">сильное возбуждение</td></tr>
+        <tr><td class="k">Взгляд на старте</td><td class="v">сразу в&nbsp;узкой зоне</td><td class="m">внимание захвачено с&nbsp;первых секунд</td></tr>
+        <tr><td class="k">Фиксации</td><td class="v">260 мс<small>самые длинные за&nbsp;сессию</small></td><td class="m">разглядывает, а&nbsp;не скользит</td></tr>
+        <tr><td class="k">Дистанция</td><td class="v">1,5 → 3 м</td><td class="m">отошёл, чтобы увидеть целиком</td></tr>
+      </table>
+    </div>
+
+    <div class="steps">
+      <div class="card step">
+        <div class="t"><span class="n">1</span>Тело <span class="arrow">→</span> что задело</div>
+        <p>ЭЭГ, полиграф и&nbsp;очки-айтрекер, данные читаются вслепую. Сердце, зрачок и&nbsp;взгляд независимо друг от&nbsp;друга говорят одно: это полотно задело сильнее всех.</p>
+      </div>
+      <div class="card step">
+        <div class="t"><span class="n">2</span>Разговор <span class="arrow">→</span> чем задело</div>
+        <p>Сессия с&nbsp;психологом раскрывает знак и&nbsp;смысл отклика: притяжение это или отторжение и&nbsp;что за ним стоит. Сильная реакция бывает и&nbsp;на&nbsp;неприятное.</p>
+      </div>
+      <div class="card step proof">
+        <div class="t">На примере Владимира</div>
+        <p>По данным приборов, без подсказок, мы верно нашли полотно, которое задело его сильнее всего. Когда Владимир раскрыл свой выбор, оказалось: <b>самая притягательная для взгляда и&nbsp;тела работа была для него самой неприятной.</b> Поэтому каналов два, и&nbsp;второй день отдан их сведению.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>2 / 4</span></div>
+</section>
+
+<!-- ======================= 3. Куда растёт ======================= -->
+<section class="slide s3">
+  <div class="topbar">
+    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
+    <span class="section">Куда растёт</span>
+  </div>
+
+  <h2>Следующий шаг — та же глубина за&nbsp;одну сессию</h2>
+
+  <div class="main">
+  <div class="path">
+    <div class="stage now">
+      <span class="node"></span>
+      <div class="when">Сейчас</div>
+      <p>Опыт идёт два дня, данные мы разбираем вручную. <b>В&nbsp;таком виде он готов для гостей.</b></p>
+    </div>
+    <div class="stage next">
+      <span class="node"></span>
+      <div class="when">Дальше: 10–15 опытов</div>
+      <p>Признаки объявляем до сверки. Конвейер анализа учится различать знак отклика: притяжение или отторжение. Научный сотрудник подтверждает каждый разбор.</p>
+    </div>
+    <div class="stage goal">
+      <span class="node"></span>
+      <div class="when">Цель</div>
+      <p>Разбор конвейера совпадает с&nbsp;ручным по качеству. <b>Та же глубина — за&nbsp;одну сессию.</b></p>
+    </div>
+  </div>
+
+  <div class="who">
+    <div class="tag">Кто это делает</div>
+    <div class="chain">
+      <div class="card">
+        <div class="r">Научный сотрудник</div>
+        <p>Обучает ведущую методу и&nbsp;подтверждает каждый разбор.</p>
+      </div>
+      <div class="ar">→</div>
+      <div class="card">
+        <div class="r">Ведущая</div>
+        <p>Постоянно работает в&nbsp;пространстве центра и&nbsp;проводит опыты.</p>
+      </div>
+      <div class="ar">→</div>
+      <div class="card tool">
+        <div class="r">Конвейер анализа</div>
+        <p>Наши скрипты обработки записей и&nbsp;ИИ-ассистент разбора. Настраиваем и&nbsp;проверяем его на&nbsp;каждом опыте.</p>
+      </div>
+    </div>
+    <div class="close">Каждый опыт с&nbsp;гостем центра — ещё один кейс для этой настройки.</div>
+  </div>
+  </div>
+
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>3 / 4</span></div>
+</section>
+
+<!-- ======================= 4. Отчёт-образец ======================= -->
+<section class="slide s4">
+  <div class="topbar">
+    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
+    <span class="section">Приложение</span>
+  </div>
+
+  <h2>Так выглядит отчёт, который получает гость</h2>
+
+  <div class="body">
+    <a class="preview" id="preview" href="https://5.181.156.100.sslip.io/neuro/demo/r/brain-report-vladimir-9f7b21.html">
+      <img src="shots/01_hero.png" alt="Первый экран отчёта"
+           onerror="document.getElementById('preview').classList.add('noimg'); this.remove();">
+      <div class="fallback">
+        <div class="prog">Нейроэстетика // Якоря Эмоциональных Состояний</div>
+        <div class="name">Отчёт: Владимир</div>
+        <div class="what">Интерактивный отчёт о&nbsp;том, как каждое полотно действовало на&nbsp;гостя</div>
+        <div class="open">Открыть отчёт →</div>
+      </div>
+    </a>
+
+    <div class="side">
+      <p class="lead">Отчёт-образец на&nbsp;примере Владимира.</p>
+      <p class="hint">Нажмите на картинку, чтобы открыть его в&nbsp;браузере.</p>
+
+      <div class="tag">Что внутри</div>
+      <ul class="list">
+        <li>3D-модель головы</li>
+        <li>запись просмотра</li>
+        <li>показатели по&nbsp;каждой работе</li>
+        <li>динамика внутри просмотра</li>
+        <li>разбор реакций</li>
+      </ul>
+
+      <div class="qr">
+        <div class="tile"><img src="img/qr_report.svg" alt="QR-код отчёта"></div>
+        <span>Или наведите камеру телефона</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>4 / 4</span></div>
+</section>
+
+</body>
+</html>
