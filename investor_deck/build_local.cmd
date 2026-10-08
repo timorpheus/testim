@@ -12,6 +12,7 @@ set "REPORT=https://5.181.156.100.sslip.io/neuro/demo/r/brain-report-vladimir-9f
 
 if not exist "img\bruegel_winter.jpg" python get_bruegel.py
 
+if not exist "shots" mkdir "shots"
 if not exist "shots\01_hero.png" (
   echo Screenshot of the report, wait ~20 s...
   "%EDGE%" --headless=new --user-data-dir="%UD%" --hide-scrollbars --force-device-scale-factor=2 --window-size=1440,810 --virtual-time-budget=15000 --screenshot="%~dp0shots\01_hero.png" "%REPORT%"
