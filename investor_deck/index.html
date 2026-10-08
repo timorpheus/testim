@@ -18,7 +18,7 @@
     --line-2: rgba(233, 243, 248, 0.18);
     --text: #e9f3f8;
     --muted: #93a6b4;
-    --dim: #63768a;
+    --dim: #7d90a3;
     --warm: #ffb44a;
     --cold: #4aa3ff;
     --teal: #62d9e8;
@@ -134,11 +134,11 @@
     background: rgba(5, 7, 11, 0.78); border: 1px solid rgba(98, 217, 232, 0.45);
     color: var(--teal); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .s2 figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.35; color: var(--dim); }
+  .s2 figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.35; color: var(--dim); text-wrap: balance; }
 
   .s2 .readings .tag { color: var(--teal); margin-bottom: 10px; }
   .s2 table { width: 100%; border-collapse: collapse; }
-  .s2 td { padding: 11px 0; border-top: 1px solid var(--line); vertical-align: baseline; }
+  .s2 td { padding: 14px 0; border-top: 1px solid var(--line); vertical-align: baseline; }
   .s2 tr:last-child td { border-bottom: 1px solid var(--line); }
   .s2 td.k { width: 30%; font-size: 15px; color: var(--muted); padding-right: 16px; }
   .s2 td.v { width: 33%; font-size: 18px; font-weight: 600; padding-right: 18px; line-height: 1.3; }
@@ -162,9 +162,9 @@
   /* ---------- слайд 3 ---------- */
   .s3 h2 { margin-top: 28px; }
   .s3 .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 76px; padding-bottom: 70px; }
-  .s3 .path { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .s3 .path { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
   .s3 .path::before {
-    content: ""; position: absolute; left: 14px; right: 14px; top: 13px; height: 2px;
+    content: ""; position: absolute; left: 14px; right: 442px; top: 13px; height: 2px;
     background: linear-gradient(90deg, var(--teal), var(--cold) 50%, var(--warm));
     opacity: 0.55;
   }
@@ -183,13 +183,16 @@
 
   .s3 .who { }
   .s3 .who .tag { color: var(--muted); margin-bottom: 14px; }
-  .s3 .chain { display: grid; grid-template-columns: 1fr 44px 1fr 44px 1.15fr; align-items: stretch; }
-  .s3 .chain .card { padding: 18px 22px; }
+  .s3 .chain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
+  .s3 .chain .card { position: relative; padding: 18px 22px; }
+  .s3 .chain .card + .card::before {
+    content: "→"; position: absolute; left: -44px; width: 44px; top: 50%; transform: translateY(-50%);
+    text-align: center; color: var(--dim); font-size: 26px;
+  }
   .s3 .chain .card .r { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
   .s3 .chain .card p { font-size: 15.5px; line-height: 1.42; color: #cfdde6; }
   .s3 .chain .card.tool { border-color: rgba(74, 163, 255, 0.40); }
   .s3 .chain .card.tool .r { color: var(--cold); }
-  .s3 .chain .ar { display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 26px; }
   .s3 .close { margin-top: 22px; font-size: 19px; color: var(--warm); }
 
   /* ---------- слайд 4 ---------- */
@@ -240,7 +243,7 @@
 <section class="slide s1">
   <div class="topbar">
     <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
-    <span class="section">Центр искусств Москва</span>
+    <span class="section">Центр Искусств Москва</span>
   </div>
 
   <h1>Поиск якорей эмоциональных состояний с&nbsp;опорой на&nbsp;искусство</h1>
@@ -255,10 +258,10 @@
     <div class="card">
       <div class="head"><span class="tag">День 1</span><span class="name">Смотреть</span></div>
       <ul class="list">
-        <li>Чай и рассказ о том, как устроено исследование. Тем временем медик ставит оборудование: ЭЭГ, полиграф, очки-айтрекер.</li>
+        <li>Чай и рассказ о том, как устроено исследование. Тем&nbsp;временем медик ставит оборудование: ЭЭГ, полиграф, очки&#8209;айтрекер.</li>
         <li>Гость молча спускается в&nbsp;зал и&nbsp;выбирает три полотна: одно нравится, другое нет, третье хочется не замечать. Какое из них какое, он не говорит.</li>
         <li>У каждого полотна он стоит сколько хочет. Голова неподвижна, двигаются только глаза.</li>
-        <li>Наверху ведущая читает данные приборов вслепую. В&nbsp;это время психолог ведёт с&nbsp;гостем глубокую сессию.</li>
+        <li>Наверху ведущая читает данные приборов вслепую. В&nbsp;это&nbsp;время психолог ведёт с&nbsp;гостем глубокую сессию.</li>
       </ul>
     </div>
     <div class="card">
@@ -272,8 +275,8 @@
       <div class="head"><span class="name">Гость уносит</span></div>
       <ul class="list">
         <li><b>Карту</b> своего взаимодействия с&nbsp;произведениями.</li>
-        <li><b>Разобранные якоря:</b> что задело, чем и&nbsp;какие жизненные пласты затронуло.</li>
-        <li><b>Репродукцию фаворита.</b> Это рабочий инструмент: с&nbsp;её помощью можно возвращаться в&nbsp;нужное состояние.</li>
+        <li><b>Разобранные эмоциональные отклики:</b> что задело и&nbsp;какие жизненные пласты затронуло.</li>
+        <li><b>Репродукцию фаворита — свой якорь.</b> Это рабочий инструмент: с&nbsp;её помощью можно возвращаться в&nbsp;нужное состояние.</li>
       </ul>
     </div>
   </div>
@@ -288,7 +291,7 @@
     <span class="section">Как это работает</span>
   </div>
 
-  <h2>Тело честно показывает, что задело. <span class="second">Что именно задело — человек рассказывает сам.</span></h2>
+  <h2>Тело честно показывает, что задело.<br><span class="second">Что именно задело — человек рассказывает сам.</span></h2>
 
   <div class="grid">
     <figure>
@@ -298,16 +301,16 @@
         <div class="ph">Брейгель, «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц»</div>
         <span class="label">Пример интерпретации</span>
       </div>
-      <figcaption>Питер Брейгель Старший. «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц», 1565</figcaption>
+      <figcaption>Брейгель Старший. «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц», 1565</figcaption>
     </figure>
 
     <div class="readings">
       <div class="tag">Что показало тело у&nbsp;полотна с&nbsp;самым сильным откликом</div>
       <table>
-        <tr><td class="k">Пульс в&nbsp;первые 10&nbsp;секунд</td><td class="v">−2,6 уд/мин<small>самое сильное замедление за&nbsp;сессию</small></td><td class="m">изображение «взяло»</td></tr>
+        <tr><td class="k">Пульс в&nbsp;первые 10&nbsp;секунд</td><td class="v">−2,6 уд/мин<small>к фоновому ритму, сильнейшее замедление за&nbsp;сессию</small></td><td class="m">изображение «взяло»</td></tr>
         <tr><td class="k">Зрачок</td><td class="v">4,84 → 5,02 мм<small>максимум сессии</small></td><td class="m">сильное возбуждение</td></tr>
         <tr><td class="k">Взгляд на старте</td><td class="v">сразу в&nbsp;узкой зоне</td><td class="m">внимание захвачено с&nbsp;первых секунд</td></tr>
-        <tr><td class="k">Фиксации</td><td class="v">260 мс<small>самые длинные за&nbsp;сессию</small></td><td class="m">разглядывает, а&nbsp;не скользит</td></tr>
+        <tr><td class="k">Остановки взгляда</td><td class="v">260 мс<small>самые длинные за&nbsp;сессию</small></td><td class="m">разглядывает, а&nbsp;не скользит</td></tr>
         <tr><td class="k">Дистанция</td><td class="v">1,5 → 3 м</td><td class="m">отошёл, чтобы увидеть целиком</td></tr>
       </table>
     </div>
@@ -315,7 +318,7 @@
     <div class="steps">
       <div class="card step">
         <div class="t"><span class="n">1</span>Тело <span class="arrow">→</span> что задело</div>
-        <p>ЭЭГ, полиграф и&nbsp;очки-айтрекер, данные читаются вслепую. Сердце, зрачок и&nbsp;взгляд независимо друг от&nbsp;друга говорят одно: это полотно задело сильнее всех.</p>
+        <p>ЭЭГ, полиграф и&nbsp;очки&#8209;айтрекер. Ведущая читает данные вслепую, не&nbsp;слыша разговора. Пульс, зрачок, взгляд и&nbsp;дистанция сходятся: это полотно задело сильнее всех.</p>
       </div>
       <div class="card step">
         <div class="t"><span class="n">2</span>Разговор <span class="arrow">→</span> чем задело</div>
@@ -323,7 +326,7 @@
       </div>
       <div class="card step proof">
         <div class="t">На примере Владимира</div>
-        <p>По данным приборов, без подсказок, мы верно нашли полотно, которое задело его сильнее всего. Когда Владимир раскрыл свой выбор, оказалось: <b>самая притягательная для взгляда и&nbsp;тела работа была для него самой неприятной.</b> Поэтому каналов два, и&nbsp;второй день отдан их сведению.</p>
+        <p>По данным приборов, без подсказок, мы верно нашли полотно, которое задело его сильнее всего. Когда результат сверили с&nbsp;ответами Владимира, оказалось: <b>самое притягательное для взгляда и&nbsp;тела полотно было для него самым неприятным.</b> Поэтому каналов два, и&nbsp;второй день отдан их сведению.</p>
       </div>
     </div>
   </div>
@@ -338,7 +341,7 @@
     <span class="section">Куда растёт</span>
   </div>
 
-  <h2>Следующий шаг — та же глубина за&nbsp;одну сессию</h2>
+  <h2>Следующий шаг — глубина двухдневного разбора за&nbsp;один визит</h2>
 
   <div class="main">
   <div class="path">
@@ -350,12 +353,12 @@
     <div class="stage next">
       <span class="node"></span>
       <div class="when">Дальше: 10–15 опытов</div>
-      <p>Признаки объявляем до сверки. Конвейер анализа учится различать знак отклика: притяжение или отторжение. Научный сотрудник подтверждает каждый разбор.</p>
+      <p>Признаки отклика фиксируем заранее, до&nbsp;сверки с&nbsp;рассказом гостя. Конвейер анализа учится различать знак отклика: притяжение или отторжение. Научный сотрудник подтверждает каждый разбор.</p>
     </div>
     <div class="stage goal">
       <span class="node"></span>
       <div class="when">Цель</div>
-      <p>Разбор конвейера совпадает с&nbsp;ручным по качеству. <b>Та же глубина — за&nbsp;одну сессию.</b></p>
+      <p>Разбор конвейера совпадает с&nbsp;ручным по качеству. <b>Гостю хватает одного визита вместо двух дней.</b></p>
     </div>
   </div>
 
@@ -364,17 +367,15 @@
     <div class="chain">
       <div class="card">
         <div class="r">Научный сотрудник</div>
-        <p>Обучает ведущую методу и&nbsp;подтверждает каждый разбор.</p>
+        <p>Передаёт ведущей метод и&nbsp;проверяет её разборы.</p>
       </div>
-      <div class="ar">→</div>
       <div class="card">
         <div class="r">Ведущая</div>
         <p>Постоянно работает в&nbsp;пространстве центра и&nbsp;проводит опыты.</p>
       </div>
-      <div class="ar">→</div>
       <div class="card tool">
         <div class="r">Конвейер анализа</div>
-        <p>Наши скрипты обработки записей и&nbsp;ИИ-ассистент разбора. Настраиваем и&nbsp;проверяем его на&nbsp;каждом опыте.</p>
+        <p>Наши программы обработки записей и&nbsp;ИИ&#8209;ассистент разбора. Настраиваем и&nbsp;проверяем его на&nbsp;каждом опыте.</p>
       </div>
     </div>
     <div class="close">Каждый опыт с&nbsp;гостем центра — ещё один кейс для этой настройки.</div>
@@ -406,14 +407,14 @@
     </a>
 
     <div class="side">
-      <p class="lead">Отчёт-образец на&nbsp;примере Владимира.</p>
+      <p class="lead">Образец: отчёт Владимира.</p>
       <p class="hint">Нажмите на картинку, чтобы открыть его в&nbsp;браузере.</p>
 
       <div class="tag">Что внутри</div>
       <ul class="list">
         <li>3D-модель головы</li>
         <li>запись просмотра</li>
-        <li>показатели по&nbsp;каждой работе</li>
+        <li>показатели по&nbsp;каждому полотну</li>
         <li>динамика внутри просмотра</li>
         <li>разбор реакций</li>
       </ul>
