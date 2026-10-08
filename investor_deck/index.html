@@ -17,11 +17,17 @@
     --line: rgba(233, 243, 248, 0.10);
     --line-2: rgba(233, 243, 248, 0.18);
     --text: #e9f3f8;
+    --body: #cfdde6;
     --muted: #93a6b4;
     --dim: #7d90a3;
     --warm: #ffb44a;
     --cold: #4aa3ff;
     --teal: #62d9e8;
+
+    /* сетка: поля 72, контент 1456, верх контента 196, низ 824 */
+    --m: 72px;
+    --top: 196px;
+    --bottom: 76px;
   }
 
   @page { size: 1600px 900px; margin: 0; }
@@ -31,16 +37,12 @@
     font-family: "Inter Deck", "Segoe UI", system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
-    font-feature-settings: "cv11", "ss01";
   }
   a { color: inherit; text-decoration: none; }
+  b { font-weight: 600; color: var(--text); }
 
   .slide {
-    position: relative;
-    width: 1600px; height: 900px;
-    padding: 46px 72px 0;
-    overflow: hidden;
-    display: flex; flex-direction: column;
+    position: relative; width: 1600px; height: 900px; overflow: hidden;
     background:
       radial-gradient(900px 520px at 92% -10%, rgba(74, 163, 255, 0.10), transparent 70%),
       radial-gradient(700px 480px at -5% 110%, rgba(98, 217, 232, 0.07), transparent 70%),
@@ -50,351 +52,425 @@
   .slide:last-child { break-after: auto; }
 
   .topbar {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    position: absolute; left: var(--m); right: var(--m); top: 46px;
+    display: flex; justify-content: space-between;
+    font-size: 14px; line-height: 18px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--teal); font-weight: 500;
   }
   .topbar .section { color: var(--warm); }
   .footer {
-    position: absolute; left: 72px; right: 72px; bottom: 26px;
+    position: absolute; left: var(--m); right: var(--m); bottom: 26px;
     display: flex; justify-content: space-between;
     font-size: 13px; color: var(--dim); letter-spacing: 0.04em;
   }
-
-  h1 { font-size: 64px; line-height: 1.04; font-weight: 700; letter-spacing: -0.02em; max-width: 1180px; }
-  h2 { font-size: 40px; line-height: 1.14; font-weight: 600; letter-spacing: -0.015em; max-width: 1380px; }
-  h2 .second { color: var(--warm); }
+  h2 {
+    position: absolute; left: var(--m); right: var(--m); top: 96px;
+    font-size: 40px; line-height: 48px; font-weight: 600; letter-spacing: -0.015em;
+  }
+  .content { position: absolute; left: var(--m); right: var(--m); top: var(--top); bottom: var(--bottom); }
 
   .card {
     background: linear-gradient(180deg, var(--panel-2), var(--panel));
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    border: 1px solid var(--line); border-radius: 16px;
   }
-  .tag {
-    display: inline-block; font-size: 13px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-  }
+  .tag { font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
 
-  ul.list { list-style: none; }
-  ul.list li { position: relative; padding-left: 22px; }
-  ul.list li::before {
-    content: ""; position: absolute; left: 2px; top: 0.62em;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+  /* ---------- 1. титул ---------- */
+  .s1 h1 {
+    position: absolute; left: var(--m); top: 112px; max-width: 1180px;
+    font-size: 66px; line-height: 70px; font-weight: 700; letter-spacing: -0.02em;
   }
-
-  /* ---------- слайд 1 ---------- */
-  .s1 h1 { margin-top: 52px; }
-  .s1 .sub { margin-top: 20px; font-size: 27px; line-height: 1.3; color: var(--muted); max-width: 1100px; }
+  .s1 .sub { position: absolute; left: var(--m); top: 270px; font-size: 28px; line-height: 36px; color: var(--muted); }
   .s1 .ready {
-    margin-top: 30px; align-self: flex-start;
+    position: absolute; left: var(--m); top: 342px;
     display: flex; align-items: center; gap: 16px;
-    padding: 15px 26px 15px 20px;
-    border-radius: 12px;
-    background: rgba(255, 180, 74, 0.09);
-    border: 1px solid rgba(255, 180, 74, 0.35);
-    font-size: 21px; line-height: 1.35;
+    padding: 16px 28px 16px 22px; border-radius: 12px;
+    background: rgba(255, 180, 74, 0.09); border: 1px solid rgba(255, 180, 74, 0.35);
+    font-size: 22px; line-height: 30px;
   }
   .s1 .ready .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--warm); box-shadow: 0 0 14px rgba(255,180,74,.8); flex: none; }
-  .s1 .ready b { color: var(--warm); font-weight: 600; }
+  .s1 .ready b { color: var(--warm); }
   .s1 .cols {
-    margin-top: 34px;
-    display: grid; grid-template-columns: 1.32fr 0.95fr 1fr; gap: 22px;
+    position: absolute; left: var(--m); right: var(--m); bottom: var(--bottom); height: 280px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
   }
-  .s1 .card { padding: 24px 26px 24px; }
-  .s1 .card .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
-  .s1 .card .head .tag { color: var(--teal); }
-  .s1 .card .head .name { font-size: 23px; font-weight: 600; }
-  .s1 .card ul.list li { font-size: 16.5px; line-height: 1.42; color: #cfdde6; }
-  .s1 .card ul.list li + li { margin-top: 9px; }
-  .s1 .card.take { border-color: rgba(255, 180, 74, 0.30); }
-  .s1 .card.take .head .name { color: var(--warm); }
-  .s1 .card.take ul.list li::before { background: var(--warm); }
-  .s1 .card.take ul.list li b { color: var(--text); font-weight: 600; }
+  .s1 .col { padding: 30px 32px; display: flex; flex-direction: column; }
+  .s1 .col .tag { color: var(--teal); }
+  .s1 .col .name { margin-top: 10px; font-size: 30px; line-height: 36px; font-weight: 600; }
+  .s1 .col p { margin-top: 16px; font-size: 20px; line-height: 30px; color: var(--body); }
+  .s1 .col.take { border-color: rgba(255, 180, 74, 0.35); }
+  .s1 .col.take .tag, .s1 .col.take .name { color: var(--warm); }
 
-  /* ---------- слайд 2 ---------- */
-  .s2 h2 { margin-top: 28px; }
-  .s2 .grid {
-    margin-top: 28px;
-    display: grid; grid-template-columns: 540px 1fr; column-gap: 40px; row-gap: 22px;
+  /* ---------- 2. комплект ---------- */
+  .s2 .equip { position: absolute; right: 0; top: 0; height: 628px; width: 353px; border-radius: 10px; overflow: hidden; }
+  .s2 .equip img { width: 100%; height: 100%; display: block; }
+  .s2 .rows { position: absolute; left: 0; top: 0; width: 1055px; height: 628px; }
+  .s2 .row {
+    position: absolute; left: 0; right: 0;
+    display: grid; grid-template-columns: 72px 300px 1fr; align-items: center;
+    border-top: 1px solid var(--line);
   }
-  .s2 figure { position: relative; }
-  .s2 .painting {
-    position: relative; width: 540px; height: 360px; border-radius: 12px; overflow: hidden;
+  .s2 .row:first-child { border-top: 0; }
+  .s2 .row .n { font-size: 15px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal); }
+  .s2 .row .name { font-size: 30px; line-height: 36px; font-weight: 600; }
+  .s2 .row p { font-size: 21px; line-height: 31px; color: var(--body); max-width: 620px; }
+  .s2 .row.all .n, .s2 .row.all .name { color: var(--warm); }
+  .s2 .row .connector {
+    position: absolute; right: -48px; top: 50%; width: 40px; height: 1px; background: var(--line-2);
+  }
+
+  /* ---------- 3. как читаем реакцию ---------- */
+  .s3 .fig { position: absolute; left: 0; top: 0; width: 620px; }
+  .s3 .painting {
+    position: relative; width: 620px; height: 412px; border-radius: 12px; overflow: hidden;
     border: 1px solid var(--line-2); background: #10161f;
   }
-  .s2 .painting img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .s2 .painting .ph {
-    position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
-    color: var(--dim); font-size: 15px; text-align: center; padding: 30px;
-  }
-  .s2 .painting.noimg .ph { display: flex; }
-  .s2 .painting .label {
-    position: absolute; left: 14px; top: 14px;
-    padding: 7px 12px; border-radius: 8px;
-    background: rgba(5, 7, 11, 0.78); border: 1px solid rgba(98, 217, 232, 0.45);
+  .s3 .painting img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s3 .painting svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .s3 .painting .label {
+    position: absolute; left: 14px; top: 14px; padding: 7px 12px; border-radius: 8px;
+    background: rgba(5, 7, 11, 0.80); border: 1px solid rgba(98, 217, 232, 0.45);
     color: var(--teal); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .s2 figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.35; color: var(--dim); text-wrap: balance; }
-
-  .s2 .readings .tag { color: var(--teal); margin-bottom: 10px; }
-  .s2 table { width: 100%; border-collapse: collapse; }
-  .s2 td { padding: 14px 0; border-top: 1px solid var(--line); vertical-align: baseline; }
-  .s2 tr:last-child td { border-bottom: 1px solid var(--line); }
-  .s2 td.k { width: 30%; font-size: 15px; color: var(--muted); padding-right: 16px; }
-  .s2 td.v { width: 33%; font-size: 18px; font-weight: 600; padding-right: 18px; line-height: 1.3; }
-  .s2 td.v small { display: block; font-size: 13.5px; font-weight: 400; color: var(--muted); margin-top: 2px; }
-  .s2 td.m { font-size: 16.5px; color: var(--teal); line-height: 1.35; }
-
-  .s2 .steps { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1.42fr; gap: 20px; }
-  .s2 .step { padding: 20px 22px; }
-  .s2 .step .t { font-size: 20px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-  .s2 .step .t .n {
-    width: 28px; height: 28px; border-radius: 50%; flex: none;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 700; color: var(--bg); background: var(--teal);
+  .s3 .painting .scale {
+    position: absolute; right: 14px; bottom: 14px; padding: 8px 12px; border-radius: 8px;
+    background: rgba(5, 7, 11, 0.80); display: flex; align-items: center; gap: 10px;
+    font-size: 12.5px; color: var(--muted);
   }
-  .s2 .step .t .arrow { color: var(--dim); font-weight: 400; }
-  .s2 .step p { font-size: 15.5px; line-height: 1.42; color: #cfdde6; }
-  .s2 .step.proof { border-color: rgba(255, 180, 74, 0.38); background: linear-gradient(180deg, rgba(255,180,74,0.08), rgba(255,180,74,0.03)); }
-  .s2 .step.proof .t { color: var(--warm); }
-  .s2 .step.proof p b { color: var(--text); font-weight: 600; }
+  .s3 .painting .scale i { display: block; width: 110px; height: 8px; border-radius: 4px;
+    background: linear-gradient(90deg, #3a8bff, #4fd15a, #ffe14a, #ff3b1f); }
+  .s3 .fig .cap { margin-top: 14px; font-size: 17px; line-height: 25px; color: var(--body); }
+  .s3 .fig .src { margin-top: 6px; font-size: 13.5px; line-height: 19px; color: var(--dim); }
 
-  /* ---------- слайд 3 ---------- */
-  .s3 h2 { margin-top: 28px; }
-  .s3 .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 76px; padding-bottom: 70px; }
-  .s3 .path { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
-  .s3 .path::before {
-    content: ""; position: absolute; left: 14px; right: 442px; top: 13px; height: 2px;
-    background: linear-gradient(90deg, var(--teal), var(--cold) 50%, var(--warm));
-    opacity: 0.55;
+  .s3 .charts { position: absolute; left: 660px; right: 0; top: 0; }
+  .s3 .charts .tag { color: var(--teal); }
+  .s3 .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 16px; }
+  .s3 .colhead { margin-top: 14px; font-size: 15px; line-height: 20px; font-weight: 600; color: var(--text); }
+  .s3 .colhead span { font-weight: 400; color: var(--muted); }
+  .s3 .rowlabel { grid-column: 1 / -1; margin-top: 12px; font-size: 14px; line-height: 18px; color: var(--muted); }
+  .s3 .rowlabel b { font-weight: 600; color: var(--body); }
+  .s3 .mini { position: relative; margin-top: 6px; height: 70px; border-radius: 8px; }
+  .s3 .mini svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .s3 .mini.hl-a { background: rgba(98, 217, 232, 0.07); box-shadow: inset 0 0 0 1px rgba(98, 217, 232, 0.35); }
+  .s3 .mini.hl-b { background: rgba(74, 163, 255, 0.07); box-shadow: inset 0 0 0 1px rgba(74, 163, 255, 0.40); }
+  .s3 .notes { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .s3 .note { padding: 16px 18px; }
+  .s3 .note .t { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .s3 .note .t .pill { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
+  .s3 .note.a { border-color: rgba(98, 217, 232, 0.35); }
+  .s3 .note.a .pill { background: rgba(98, 217, 232, 0.15); color: var(--teal); }
+  .s3 .note.b { border-color: rgba(74, 163, 255, 0.40); }
+  .s3 .note.b .pill { background: rgba(74, 163, 255, 0.15); color: var(--cold); }
+  .s3 .note p { font-size: 15.5px; line-height: 22px; color: var(--body); }
+  .s3 .legend { margin-top: 10px; font-size: 13px; color: var(--dim); display: flex; gap: 18px; align-items: center; }
+  .s3 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--warm); margin-right: 6px; vertical-align: -1px; }
+  .bottomline {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 18px 24px; border-radius: 12px;
+    background: rgba(255, 180, 74, 0.08); border: 1px solid rgba(255, 180, 74, 0.32);
+    font-size: 20px; line-height: 28px;
   }
-  .s3 .stage { position: relative; padding-top: 46px; }
-  .s3 .stage .node {
-    position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%;
-    background: var(--bg); border: 2px solid currentColor;
-  }
-  .s3 .stage .node::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: currentColor; }
-  .s3 .stage .when { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
-  .s3 .stage p { font-size: 20px; line-height: 1.45; color: #cfdde6; max-width: 450px; }
-  .s3 .stage p b { color: var(--text); font-weight: 600; }
-  .s3 .stage.now { color: var(--teal); }
-  .s3 .stage.next { color: var(--cold); }
-  .s3 .stage.goal { color: var(--warm); }
+  .bottomline b { color: var(--warm); }
 
-  .s3 .who { }
-  .s3 .who .tag { color: var(--muted); margin-bottom: 14px; }
-  .s3 .chain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
-  .s3 .chain .card { position: relative; padding: 18px 22px; }
-  .s3 .chain .card + .card::before {
-    content: "→"; position: absolute; left: -44px; width: 44px; top: 50%; transform: translateY(-50%);
+  /* ---------- 4. доказательство ---------- */
+  .s4 .channels { position: absolute; left: 0; top: 0; width: 620px; height: 628px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s4 .ch { padding: 26px 30px; }
+  .s4 .ch .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .s4 .ch .name { font-size: 28px; line-height: 34px; font-weight: 600; }
+  .s4 .ch .tag { color: var(--teal); }
+  .s4 .ch p { font-size: 21px; line-height: 31px; color: var(--body); }
+  .s4 .join { text-align: center; font-size: 28px; line-height: 28px; color: var(--dim); }
+  .s4 .merge {
+    position: relative;
+    padding: 22px 30px; border-radius: 14px;
+    background: rgba(98, 217, 232, 0.08); border: 1px solid rgba(98, 217, 232, 0.35);
+    font-size: 20px; line-height: 28px;
+  }
+  .s4 .merge b { color: var(--teal); }
+  .s4 .case {
+    position: absolute; left: 660px; right: 0; top: 0; height: 628px;
+    padding: 30px 36px; display: flex; flex-direction: column; justify-content: space-between;
+    border-color: rgba(255, 180, 74, 0.38);
+    background: linear-gradient(180deg, rgba(255,180,74,0.08), rgba(255,180,74,0.02));
+  }
+  .s4 .case > .tag { color: var(--warm); }
+  .s4 .step { display: grid; grid-template-columns: 150px 1fr; column-gap: 24px; }
+  .s4 .step .k { font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+  .s4 .step p { font-size: 23px; line-height: 33px; color: var(--body); }
+  .s4 .step p b { color: var(--text); }
+  .s4 .facts { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .s4 .facts span {
+    padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line-2);
+    font-size: 17px; line-height: 22px; color: var(--text); background: rgba(5,7,11,0.35);
+  }
+  .s4 .verdict {
+    padding-top: 26px; border-top: 1px solid rgba(255, 180, 74, 0.30);
+    font-size: 30px; line-height: 40px; font-weight: 600;
+  }
+  .s4 .verdict span { color: var(--warm); }
+
+  /* ---------- 5. куда растёт ---------- */
+  .s5 .path { position: absolute; left: 0; right: 0; top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+  .s5 .path::before {
+    content: ""; position: absolute; left: 14px; top: 13px; height: 2px;
+    width: calc((100% - 96px) / 3 * 2 + 96px);
+    background: linear-gradient(90deg, var(--teal), var(--cold) 50%, var(--warm)); opacity: 0.55;
+  }
+  .s5 .stage { position: relative; padding-top: 48px; }
+  .s5 .stage .node { position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 2px solid currentColor; }
+  .s5 .stage .node::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: currentColor; }
+  .s5 .stage .when { font-size: 34px; line-height: 40px; font-weight: 700; margin-bottom: 14px; }
+  .s5 .stage p { font-size: 20px; line-height: 30px; color: var(--body); }
+  .s5 .stage.now { color: var(--teal); }
+  .s5 .stage.next { color: var(--cold); }
+  .s5 .stage.goal { color: var(--warm); }
+  .s5 .who { position: absolute; left: 0; right: 0; bottom: 104px; }
+  .s5 .who .tag { color: var(--muted); margin-bottom: 14px; }
+  .s5 .chain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+  .s5 .chain .card { position: relative; padding: 20px 24px; }
+  .s5 .chain .card + .card::before {
+    content: "→"; position: absolute; left: -48px; width: 48px; top: 50%; transform: translateY(-50%);
     text-align: center; color: var(--dim); font-size: 26px;
   }
-  .s3 .chain .card .r { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
-  .s3 .chain .card p { font-size: 15.5px; line-height: 1.42; color: #cfdde6; }
-  .s3 .chain .card.tool { border-color: rgba(74, 163, 255, 0.40); }
-  .s3 .chain .card.tool .r { color: var(--cold); }
-  .s3 .close { margin-top: 22px; font-size: 19px; color: var(--warm); }
+  .s5 .chain .r { font-size: 20px; line-height: 26px; font-weight: 600; margin-bottom: 6px; }
+  .s5 .chain p { font-size: 16.5px; line-height: 24px; color: var(--body); }
+  .s5 .chain .card.tool { border-color: rgba(74, 163, 255, 0.40); }
+  .s5 .chain .card.tool .r { color: var(--cold); }
 
-  /* ---------- слайд 4 ---------- */
-  .s4 h2 { margin-top: 28px; }
-  .s4 .body { margin-top: 30px; display: grid; grid-template-columns: 1040px 1fr; gap: 44px; }
-  .s4 .preview {
-    position: relative; display: block; width: 1040px; height: 585px;
-    border-radius: 14px; overflow: hidden;
+  /* ---------- 6. отчёт ---------- */
+  .s6 .preview {
+    position: absolute; left: 0; top: 0; width: 1040px; height: 585px;
+    border-radius: 14px; overflow: hidden; display: block;
     border: 1px solid rgba(98, 217, 232, 0.35);
     box-shadow: 0 0 0 6px rgba(98, 217, 232, 0.05), 0 30px 80px rgba(0, 0, 0, 0.55);
     background: #070a10;
   }
-  .s4 .preview img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-  .s4 .preview .fallback {
-    position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center;
-    padding: 70px 80px;
+  .s6 .preview img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .s6 .preview .fallback {
+    position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; padding: 70px 80px;
     background:
       radial-gradient(520px 360px at 78% 40%, rgba(74, 163, 255, 0.20), transparent 70%),
       radial-gradient(420px 300px at 70% 70%, rgba(98, 217, 232, 0.14), transparent 70%),
       linear-gradient(180deg, #0b1018, #05070b);
   }
-  .s4 .preview.noimg .fallback { display: flex; }
-  .s4 .fallback .prog { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
-  .s4 .fallback .name { margin-top: 18px; font-size: 54px; font-weight: 700; letter-spacing: -0.02em; }
-  .s4 .fallback .what { margin-top: 14px; font-size: 22px; color: var(--muted); max-width: 560px; line-height: 1.4; }
-  .s4 .fallback .open {
-    margin-top: 36px; align-self: flex-start; padding: 14px 24px; border-radius: 10px;
-    background: var(--teal); color: var(--bg); font-size: 19px; font-weight: 600;
-  }
-  .s4 .fallback .by { position: absolute; left: 80px; bottom: 44px; font-size: 14px; color: var(--dim); }
-
-  .s4 .side .lead { font-size: 21px; line-height: 1.4; font-weight: 500; }
-  .s4 .side .hint { margin-top: 10px; font-size: 16px; color: var(--muted); line-height: 1.4; }
-  .s4 .side .tag { color: var(--teal); margin-top: 30px; margin-bottom: 10px; }
-  .s4 .side ul.list li { font-size: 16.5px; line-height: 1.4; color: #cfdde6; }
-  .s4 .side ul.list li + li { margin-top: 7px; }
-  .s4 .side .qr {
-    margin-top: 32px; display: flex; align-items: center; gap: 18px;
-  }
-  .s4 .side .qr .tile { width: 132px; height: 132px; padding: 11px; border-radius: 12px; background: var(--text); flex: none; }
-  .s4 .side .qr .tile img { width: 100%; height: 100%; display: block; }
-  .s4 .side .qr span { font-size: 14.5px; color: var(--muted); line-height: 1.4; }
+  .s6 .preview.noimg .fallback { display: flex; }
+  .s6 .fallback .prog { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+  .s6 .fallback .name { margin-top: 18px; font-size: 54px; line-height: 60px; font-weight: 700; letter-spacing: -0.02em; }
+  .s6 .fallback .what { margin-top: 14px; font-size: 22px; line-height: 31px; color: var(--muted); max-width: 560px; }
+  .s6 .fallback .open { margin-top: 36px; align-self: flex-start; padding: 14px 24px; border-radius: 10px; background: var(--teal); color: var(--bg); font-size: 19px; font-weight: 600; }
+  .s6 .side { position: absolute; left: 1084px; right: 0; top: 0; }
+  .s6 .side .lead { font-size: 22px; line-height: 30px; font-weight: 600; }
+  .s6 .side .hint { margin-top: 8px; font-size: 17px; line-height: 25px; color: var(--muted); }
+  .s6 .side .tag { color: var(--teal); margin-top: 32px; margin-bottom: 12px; }
+  .s6 .side ul { list-style: none; }
+  .s6 .side li { position: relative; padding-left: 20px; font-size: 17px; line-height: 25px; color: var(--body); }
+  .s6 .side li + li { margin-top: 6px; }
+  .s6 .side li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .s6 .qr { position: absolute; left: 1084px; bottom: 43px; display: flex; align-items: center; gap: 18px; }
+  .s6 .qr .tile { width: 132px; height: 132px; padding: 11px; border-radius: 12px; background: var(--text); flex: none; }
+  .s6 .qr .tile img { width: 100%; height: 100%; display: block; }
+  .s6 .qr span { font-size: 15px; line-height: 22px; color: var(--muted); }
 </style>
 </head>
 <body>
 
 <!-- ======================= 1. Что это и что готово ======================= -->
 <section class="slide s1">
-  <div class="topbar">
-    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
-    <span class="section">Центр Искусств Москва</span>
-  </div>
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Центр Искусств Москва</span></div>
 
   <h1>Поиск якорей эмоциональных состояний с&nbsp;опорой на&nbsp;искусство</h1>
   <p class="sub">Как мозг и тело выбирают произведение, которое вас восстанавливает</p>
-
-  <div class="ready">
-    <span class="dot"></span>
-    <span><b>Двухдневный опыт с ручной обработкой данных готов.</b> Его можно предлагать гостям уже сейчас.</span>
-  </div>
+  <div class="ready"><span class="dot"></span><span><b>Двухдневный опыт готов.</b> Его можно предлагать гостям уже сейчас.</span></div>
 
   <div class="cols">
-    <div class="card">
-      <div class="head"><span class="tag">День 1</span><span class="name">Смотреть</span></div>
-      <ul class="list">
-        <li>Чай и рассказ о том, как устроено исследование. Тем&nbsp;временем медик ставит оборудование: ЭЭГ, полиграф, очки&#8209;айтрекер.</li>
-        <li>Гость молча спускается в&nbsp;зал и&nbsp;выбирает три полотна: одно нравится, другое нет, третье хочется не замечать. Какое из них какое, он не говорит.</li>
-        <li>У каждого полотна он стоит сколько хочет. Голова неподвижна, двигаются только глаза.</li>
-        <li>Наверху ведущая читает данные приборов вслепую. В&nbsp;это&nbsp;время психолог ведёт с&nbsp;гостем глубокую сессию.</li>
-      </ul>
+    <div class="card col">
+      <span class="tag">День 1</span>
+      <div class="name">Смотреть</div>
+      <p>Гость выбирает в&nbsp;зале три полотна и&nbsp;молча смотрит на каждое. Приборы записывают реакцию тела, потом психолог ведёт сессию.</p>
     </div>
-    <div class="card">
-      <div class="head"><span class="tag">День 2</span><span class="name">Свести</span></div>
-      <ul class="list">
-        <li>Ведущая и психолог сводят два независимых разбора и находят полотно-фаворит, которое действует на гостя лучше всего.</li>
-        <li>Гостю показывают анализ, дарят отчёт и вручают репродукцию фаворита.</li>
-      </ul>
+    <div class="card col">
+      <span class="tag">День 2</span>
+      <div class="name">Свести</div>
+      <p>Сводим данные приборов с&nbsp;рассказом гостя и&nbsp;находим полотно&#8209;фаворит.</p>
     </div>
-    <div class="card take">
-      <div class="head"><span class="name">Гость уносит</span></div>
-      <ul class="list">
-        <li><b>Карту</b> своего взаимодействия с&nbsp;произведениями.</li>
-        <li><b>Разобранные эмоциональные отклики:</b> что задело и&nbsp;какие жизненные пласты затронуло.</li>
-        <li><b>Репродукцию фаворита — свой якорь.</b> Это рабочий инструмент: с&nbsp;её помощью можно возвращаться в&nbsp;нужное состояние.</li>
-      </ul>
+    <div class="card col take">
+      <span class="tag">Результат</span>
+      <div class="name">Гость уносит</div>
+      <p>Карту своих реакций и&nbsp;репродукцию фаворита. Это его якорь: глядя на неё, можно вернуться в&nbsp;нужное состояние.</p>
     </div>
   </div>
 
-  <div class="footer"><span>Проект Центра Искусств Москва</span><span>1 / 4</span></div>
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>1 / 6</span></div>
 </section>
 
-<!-- ======================= 2. Суть и доказательство ======================= -->
+<!-- ======================= 2. Комплект ======================= -->
 <section class="slide s2">
-  <div class="topbar">
-    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
-    <span class="section">Как это работает</span>
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Комплект</span></div>
+  <h2>Три прибора записывают, как мозг, глаза и&nbsp;тело отвечают на&nbsp;полотно</h2>
+
+  <div class="content">
+    <div class="rows">
+      <!-- позиции строк = границы панелей на картинке справа (доли высоты 628 px) -->
+      <div class="row" style="top:2px; height:152px"><span class="n">01</span><span class="name">ЭЭГ</span><p>Шапка с&nbsp;электродами записывает активность мозга.</p></div>
+      <div class="row" style="top:157px; height:153px"><span class="n">02</span><span class="name">Очки&#8209;айтрекер</span><p>Видят, куда и&nbsp;как долго смотрит гость. Камера в&nbsp;оправе снимает то, что видит он.</p></div>
+      <div class="row" style="top:313px; height:145px"><span class="n">03</span><span class="name">Полиграф</span><p>Браслет и&nbsp;датчик на руке: пульс и&nbsp;реакция кожи.</p></div>
+      <div class="row all" style="top:462px; height:162px"><span class="n">04</span><span class="name">Всё вместе</span><p>Медик ставит комплект за 30–40 минут, пока гость пьёт&nbsp;чай.</p></div>
+    </div>
+    <div class="equip"><img src="img/equipment.webp" alt="Комплект: ЭЭГ, очки-айтрекер, полиграф, всё вместе"></div>
   </div>
 
-  <h2>Тело честно показывает, что задело.<br><span class="second">Что именно задело — человек рассказывает сам.</span></h2>
-
-  <div class="grid">
-    <figure>
-      <div class="painting" id="painting">
-        <img src="img/bruegel_winter.jpg" alt="Питер Брейгель Старший. Зимний пейзаж с конькобежцами и ловушкой для птиц"
-             onerror="document.getElementById('painting').classList.add('noimg'); this.remove();">
-        <div class="ph">Брейгель, «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц»</div>
-        <span class="label">Пример интерпретации</span>
-      </div>
-      <figcaption>Брейгель Старший. «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц», 1565</figcaption>
-    </figure>
-
-    <div class="readings">
-      <div class="tag">Что показало тело у&nbsp;полотна с&nbsp;самым сильным откликом</div>
-      <table>
-        <tr><td class="k">Пульс в&nbsp;первые 10&nbsp;секунд</td><td class="v">−2,6 уд/мин<small>к фоновому ритму, сильнейшее замедление за&nbsp;сессию</small></td><td class="m">изображение «взяло»</td></tr>
-        <tr><td class="k">Зрачок</td><td class="v">4,84 → 5,02 мм<small>максимум сессии</small></td><td class="m">сильное возбуждение</td></tr>
-        <tr><td class="k">Взгляд на старте</td><td class="v">сразу в&nbsp;узкой зоне</td><td class="m">внимание захвачено с&nbsp;первых секунд</td></tr>
-        <tr><td class="k">Остановки взгляда</td><td class="v">260 мс<small>самые длинные за&nbsp;сессию</small></td><td class="m">разглядывает, а&nbsp;не скользит</td></tr>
-        <tr><td class="k">Дистанция</td><td class="v">1,5 → 3 м</td><td class="m">отошёл, чтобы увидеть целиком</td></tr>
-      </table>
-    </div>
-
-    <div class="steps">
-      <div class="card step">
-        <div class="t"><span class="n">1</span>Тело <span class="arrow">→</span> что задело</div>
-        <p>ЭЭГ, полиграф и&nbsp;очки&#8209;айтрекер. Ведущая читает данные вслепую, не&nbsp;слыша разговора. Пульс, зрачок, взгляд и&nbsp;дистанция сходятся: это полотно задело сильнее всех.</p>
-      </div>
-      <div class="card step">
-        <div class="t"><span class="n">2</span>Разговор <span class="arrow">→</span> чем задело</div>
-        <p>Сессия с&nbsp;психологом раскрывает знак и&nbsp;смысл отклика: притяжение это или отторжение и&nbsp;что за ним стоит. Сильная реакция бывает и&nbsp;на&nbsp;неприятное.</p>
-      </div>
-      <div class="card step proof">
-        <div class="t">На примере Владимира</div>
-        <p>По данным приборов, без подсказок, мы верно нашли полотно, которое задело его сильнее всего. Когда результат сверили с&nbsp;ответами Владимира, оказалось: <b>самое притягательное для взгляда и&nbsp;тела полотно было для него самым неприятным.</b> Поэтому каналов два, и&nbsp;второй день отдан их сведению.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer"><span>Проект Центра Искусств Москва</span><span>2 / 4</span></div>
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>2 / 6</span></div>
 </section>
 
-<!-- ======================= 3. Куда растёт ======================= -->
+<!-- ======================= 3. Как читаем реакцию ======================= -->
 <section class="slide s3">
-  <div class="topbar">
-    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
-    <span class="section">Куда растёт</span>
-  </div>
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Как читаем реакцию</span></div>
+  <h2>Тело честно показывает, что задело</h2>
 
-  <h2>Следующий шаг — глубина двухдневного разбора за&nbsp;один визит</h2>
-
-  <div class="main">
-  <div class="path">
-    <div class="stage now">
-      <span class="node"></span>
-      <div class="when">Сейчас</div>
-      <p>Опыт идёт два дня, данные мы разбираем вручную. <b>В&nbsp;таком виде он готов для гостей.</b></p>
-    </div>
-    <div class="stage next">
-      <span class="node"></span>
-      <div class="when">Дальше: 10–15 опытов</div>
-      <p>Признаки отклика фиксируем заранее, до&nbsp;сверки с&nbsp;рассказом гостя. Конвейер анализа учится различать знак отклика: притяжение или отторжение. Научный сотрудник подтверждает каждый разбор.</p>
-    </div>
-    <div class="stage goal">
-      <span class="node"></span>
-      <div class="when">Цель</div>
-      <p>Разбор конвейера совпадает с&nbsp;ручным по качеству. <b>Гостю хватает одного визита вместо двух дней.</b></p>
-    </div>
-  </div>
-
-  <div class="who">
-    <div class="tag">Кто это делает</div>
-    <div class="chain">
-      <div class="card">
-        <div class="r">Научный сотрудник</div>
-        <p>Передаёт ведущей метод и&nbsp;проверяет её разборы.</p>
+  <div class="content">
+    <div class="fig">
+      <div class="painting">
+        <img src="img/bruegel_winter.jpg" alt="Брейгель Старший. Зимний пейзаж с конькобежцами и ловушкой для птиц"
+             onerror="this.onerror=null; this.src='img/bruegel_winter_preview.jpg';">
+        <svg viewBox="0 0 1000 665" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <radialGradient id="hm-hot">
+              <stop offset="0" stop-color="#ff2a1a" stop-opacity="0.80"/>
+              <stop offset="0.30" stop-color="#ff3b1f" stop-opacity="0.74"/>
+              <stop offset="0.44" stop-color="#ffd23a" stop-opacity="0.70"/>
+              <stop offset="0.60" stop-color="#ffe14a" stop-opacity="0.60"/>
+              <stop offset="0.70" stop-color="#4fd15a" stop-opacity="0.55"/>
+              <stop offset="0.85" stop-color="#3fbf6a" stop-opacity="0.38"/>
+              <stop offset="0.94" stop-color="#3a8bff" stop-opacity="0.18"/>
+              <stop offset="1" stop-color="#3a8bff" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hm-warm">
+              <stop offset="0" stop-color="#ffd23a" stop-opacity="0.72"/>
+              <stop offset="0.36" stop-color="#ffe14a" stop-opacity="0.64"/>
+              <stop offset="0.56" stop-color="#4fd15a" stop-opacity="0.52"/>
+              <stop offset="0.80" stop-color="#3fbf6a" stop-opacity="0.34"/>
+              <stop offset="0.92" stop-color="#3a8bff" stop-opacity="0.16"/>
+              <stop offset="1" stop-color="#3a8bff" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hm-cool">
+              <stop offset="0" stop-color="#4fd15a" stop-opacity="0.60"/>
+              <stop offset="0.55" stop-color="#3fbf6a" stop-opacity="0.42"/>
+              <stop offset="0.85" stop-color="#3a8bff" stop-opacity="0.18"/>
+              <stop offset="1" stop-color="#3a8bff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- зоны взгляда по композиции (доли: x/1000, y/665) -->
+          <ellipse cx="765" cy="540" rx="78" ry="58" fill="url(#hm-hot)"/>   <!-- ловушка для птиц -->
+          <ellipse cx="380" cy="505" rx="88" ry="56" fill="url(#hm-hot)"/>   <!-- конькобежцы в центре -->
+          <ellipse cx="232" cy="568" rx="52" ry="44" fill="url(#hm-warm)"/>  <!-- конькобежцы слева -->
+          <ellipse cx="458" cy="542" rx="36" ry="30" fill="url(#hm-warm)"/>  <!-- вороны на кусте -->
+          <ellipse cx="345" cy="602" rx="36" ry="30" fill="url(#hm-cool)"/>  <!-- фигуры внизу -->
+          <ellipse cx="575" cy="312" rx="46" ry="34" fill="url(#hm-cool)"/>  <!-- церковь -->
+        </svg>
+        <span class="label">Пример интерпретации</span>
+        <span class="scale">коротко <i></i> долго</span>
       </div>
-      <div class="card">
-        <div class="r">Ведущая</div>
-        <p>Постоянно работает в&nbsp;пространстве центра и&nbsp;проводит опыты.</p>
-      </div>
-      <div class="card tool">
-        <div class="r">Конвейер анализа</div>
-        <p>Наши программы обработки записей и&nbsp;ИИ&#8209;ассистент разбора. Настраиваем и&nbsp;проверяем его на&nbsp;каждом опыте.</p>
+      <p class="cap">Тепловая карта: чем краснее зона, тем дольше гость на&nbsp;неё смотрел.</p>
+      <p class="src">Брейгель Старший. «Зимний пейзаж с&nbsp;конькобежцами и&nbsp;ловушкой для птиц», 1565</p>
+    </div>
+
+    <div class="charts">
+      <div class="tag">Графики Владимира: четыре полотна, три сигнала</div>
+      <div class="grid4" id="chartgrid"></div>
+      <div class="legend"><span><i></i>пик просмотра; у&nbsp;взгляда — самый узкий момент</span></div>
+      <div class="notes">
+        <div class="card note a">
+          <div class="t">Картина 1 <span class="pill">сходятся</span></div>
+          <p>К концу просмотра растут активация и&nbsp;вовлечённость, а&nbsp;взгляд сужается. Внимание нарастает.</p>
+        </div>
+        <div class="card note b">
+          <div class="t">Картина 4 <span class="pill">расходятся</span></div>
+          <p>Мозг на пике в&nbsp;середине, но взгляд так и&nbsp;не&nbsp;собирается, и&nbsp;через 32 секунды гость уходит.</p>
+        </div>
       </div>
     </div>
-    <div class="close">Каждый опыт с&nbsp;гостем центра — ещё один кейс для этой настройки.</div>
-  </div>
+
+    <div class="bottomline"><b>Вывод делаем, когда сигналы сходятся.</b> Сила отклика видна по телу, а&nbsp;его знак нет.</div>
   </div>
 
-  <div class="footer"><span>Проект Центра Искусств Москва</span><span>3 / 4</span></div>
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>3 / 6</span></div>
 </section>
 
-<!-- ======================= 4. Отчёт-образец ======================= -->
+<!-- ======================= 4. Доказательство ======================= -->
 <section class="slide s4">
-  <div class="topbar">
-    <span>Нейроэстетика // Якоря Эмоциональных Состояний</span>
-    <span class="section">Приложение</span>
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Доказательство</span></div>
+  <h2>Что именно задело — человек рассказывает сам</h2>
+
+  <div class="content">
+    <div class="channels">
+      <div class="card ch">
+        <div class="head"><span class="name">Приборы</span><span class="tag">вслепую</span></div>
+        <p>Ведущая читает данные, не&nbsp;слыша разговора, и&nbsp;находит полотно, которое задело сильнее всех.</p>
+      </div>
+      <div class="join">+</div>
+      <div class="card ch">
+        <div class="head"><span class="name">Разговор</span><span class="tag">с психологом</span></div>
+        <p>Гость рассказывает, что почувствовал и&nbsp;вспомнил. Отсюда знак отклика: притяжение или отторжение.</p>
+      </div>
+      <div class="join">↓</div>
+      <div class="merge"><b>День 2.</b> Сводим оба канала и&nbsp;выбираем фаворита.</div>
+    </div>
+
+    <div class="card case">
+      <div class="tag">На примере Владимира</div>
+      <div class="step">
+        <span class="k">Приборы</span>
+        <div>
+          <p>Сильнее всех его задело одно полотно.</p>
+          <div class="facts"><span>пульс −2,6 уд/мин</span><span>зрачок на максимуме сессии</span><span>отошёл с&nbsp;1,5 до&nbsp;3&nbsp;м</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <span class="k">Сверка</span>
+        <p>Сверили с&nbsp;ответами Владимира: <b>это полотно не&nbsp;понравилось ему больше всех.</b></p>
+      </div>
+      <div class="verdict">Полотно мы нашли верно, знак отклика показал разговор. <span>Поэтому каналов два.</span></div>
+    </div>
   </div>
 
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>4 / 6</span></div>
+</section>
+
+<!-- ======================= 5. Куда растёт ======================= -->
+<section class="slide s5">
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Куда растёт</span></div>
+  <h2>Следующий шаг: глубина двухдневного разбора за&nbsp;один визит</h2>
+
+  <div class="content">
+    <div class="path">
+      <div class="stage now"><span class="node"></span><div class="when">Сейчас</div>
+        <p>Два дня, данные разбираем вручную. <b>Опыт&nbsp;готов для&nbsp;гостей.</b></p></div>
+      <div class="stage next"><span class="node"></span><div class="when">10–15 опытов</div>
+        <p>Признаки отклика фиксируем заранее. Конвейер анализа учится отличать притяжение от&nbsp;отторжения, научный сотрудник проверяет каждый разбор.</p></div>
+      <div class="stage goal"><span class="node"></span><div class="when">Цель</div>
+        <p>Конвейер разбирает данные так&nbsp;же точно, как человек. <b>Гостю хватает одного визита.</b></p></div>
+    </div>
+
+    <div class="who">
+      <div class="tag">Кто это делает</div>
+      <div class="chain">
+        <div class="card"><div class="r">Научный сотрудник</div><p>Передаёт метод ведущей.</p></div>
+        <div class="card"><div class="r">Ведущая</div><p>Работает в&nbsp;центре и&nbsp;проводит опыты.</p></div>
+        <div class="card tool"><div class="r">Конвейер анализа</div><p>Наши программы обработки и&nbsp;ИИ&#8209;ассистент разбора.</p></div>
+      </div>
+    </div>
+    <div class="bottomline"><b>Каждый опыт с&nbsp;гостем центра</b> становится кейсом для этой настройки.</div>
+  </div>
+
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>5 / 6</span></div>
+</section>
+
+<!-- ======================= 6. Отчёт-образец ======================= -->
+<section class="slide s6">
+  <div class="topbar"><span>Нейроэстетика // Якоря Эмоциональных Состояний</span><span class="section">Приложение</span></div>
   <h2>Так выглядит отчёт, который получает гость</h2>
 
-  <div class="body">
+  <div class="content">
     <a class="preview" id="preview" href="https://5.181.156.100.sslip.io/neuro/demo/r/brain-report-vladimir-9f7b21.html">
       <img src="shots/01_hero.png" alt="Первый экран отчёта"
            onerror="document.getElementById('preview').classList.add('noimg'); this.remove();">
@@ -409,25 +485,75 @@
     <div class="side">
       <p class="lead">Образец: отчёт Владимира.</p>
       <p class="hint">Нажмите на картинку, чтобы открыть его в&nbsp;браузере.</p>
-
       <div class="tag">Что внутри</div>
-      <ul class="list">
+      <ul>
         <li>3D-модель головы</li>
         <li>запись просмотра</li>
         <li>показатели по&nbsp;каждому полотну</li>
         <li>динамика внутри просмотра</li>
         <li>разбор реакций</li>
       </ul>
-
-      <div class="qr">
-        <div class="tile"><img src="img/qr_report.svg" alt="QR-код отчёта"></div>
-        <span>Или наведите камеру телефона</span>
-      </div>
+    </div>
+    <div class="qr">
+      <div class="tile"><img src="img/qr_report.svg" alt="QR-код отчёта"></div>
+      <span>Или наведите камеру телефона</span>
     </div>
   </div>
 
-  <div class="footer"><span>Проект Центра Искусств Москва</span><span>4 / 4</span></div>
+  <div class="footer"><span>Проект Центра Искусств Москва</span><span>6 / 6</span></div>
 </section>
 
+<script>
+// Графики «Динамика внутри просмотра» из отчёта Владимира (значения сняты с экрана отчёта).
+// t — доля времени просмотра, v — значение; оранжевая точка — пик (у разброса взгляда — минимум).
+const DUR = [58, 35, 53, 32];
+const ROWS = [
+  { label: 'Активация мозга', formula: 'β/α', lo: 1.56, hi: 2.83, peak: 'max', s: [
+    [[0,2.36],[.327,2.21],[.672,2.21],[1,2.68]],
+    [[0,1.77],[.485,1.71],[1,1.83]],
+    [[0,1.96],[.321,1.87],[.661,1.95],[1,2.04]],
+    [[0,1.96],[.499,2.43],[1,2.16]] ] },
+  { label: 'Вовлечённость', formula: 'β/(α+θ)', lo: 0.88, hi: 1.32, peak: 'max', s: [
+    [[0,1.16],[.327,1.13],[.672,1.10],[1,1.19]],
+    [[0,0.93],[.485,0.96],[1,1.11]],
+    [[0,1.05],[.321,1.03],[.661,1.16],[1,1.06]],
+    [[0,1.13],[.499,1.27],[1,1.19]] ] },
+  { label: 'Разброс взгляда', formula: 'px, меньше — взгляд собраннее', lo: 41, hi: 138, peak: 'min', s: [
+    [[0,113],[.327,110],[.672,109],[1,87]],
+    [[0,58],[.485,52],[1,69]],
+    [[0,79],[.321,90],[.661,70],[1,58]],
+    [[0,116],[.499,127],[1,107]] ] },
+];
+const HL = { 0: 'hl-a', 3: 'hl-b' };
+
+(function draw() {
+  const grid = document.getElementById('chartgrid');
+  const W = 187, H = 70, px = 12, pt = 9, pb = 9;
+  let html = '';
+  DUR.forEach((d, i) => { html += `<div class="colhead">Картина ${i + 1} <span>· ${d} с</span></div>`; });
+  ROWS.forEach(r => {
+    html += `<div class="rowlabel"><b>${r.label}</b> · ${r.formula}</div>`;
+    r.s.forEach((pts, i) => {
+      const X = t => px + t * (W - 2 * px);
+      const Y = v => pt + (r.hi - v) / (r.hi - r.lo) * (H - pt - pb);
+      const vals = pts.map(p => p[1]);
+      const pk = r.peak === 'max' ? vals.indexOf(Math.max(...vals)) : vals.indexOf(Math.min(...vals));
+      let svg = `<svg viewBox="0 0 ${W} ${H}">`;
+      [r.hi, (r.hi + r.lo) / 2, r.lo].forEach(v => {
+        svg += `<line x1="${px}" x2="${W - px}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(233,243,248,0.10)" stroke-width="1"/>`;
+      });
+      svg += `<polyline fill="none" stroke="#62d9e8" stroke-width="2" points="${pts.map(p => X(p[0]) + ',' + Y(p[1])).join(' ')}"/>`;
+      pts.forEach((p, j) => {
+        svg += j === pk
+          ? `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="5.5" fill="#ffb44a"/>`
+          : `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="3.5" fill="#62d9e8"/>`;
+      });
+      svg += `</svg>`;
+      html += `<div class="mini ${HL[i] || ''}">${svg}</div>`;
+    });
+  });
+  grid.innerHTML = html;
+})();
+</script>
 </body>
 </html>
